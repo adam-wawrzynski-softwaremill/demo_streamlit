@@ -4,7 +4,7 @@ import streamlit as st
 from streamlit.web.server.websocket_headers import _get_websocket_headers
 
 from demo_streamlit.app_state import AppState, get_app_state
-from demo_streamlit.callbacks import sample_index_callback
+from demo_streamlit.callbacks import button_callback, sample_index_callback
 from demo_streamlit.load_data import load_dataset
 from demo_streamlit.plot import generate_plot
 from demo_streamlit.settings import Settings
@@ -24,6 +24,15 @@ def sidebar_view() -> None:
     if headers:
         with st.sidebar.expander("HTTP header"):
             st.json(headers)
+
+    st.sidebar.button(
+        label="Log parameters to terminal",
+        on_click=button_callback,
+        args=(
+            st.session_state.get(Settings.selected_sample_index, 0),
+            headers,
+        ),
+    )
 
 
 def main_view() -> None:
