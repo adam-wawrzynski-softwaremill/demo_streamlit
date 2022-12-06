@@ -36,6 +36,20 @@ poetry install
 
 Once all the steps have been completed, the environment is ready to go.
 
+## Pre-commit hooks setup
+
+In order to improve the development experience, please make sure to install
+our [pre-commit][https://pre-commit.com/] hooks as the very first step after
+cloning the repository:
+
+```bash
+poetry install
+poetry run pre-commit install
+```
+
+pre-commit: https://pre-commit.com/
+
+
 # Run
 
 To run the application type:

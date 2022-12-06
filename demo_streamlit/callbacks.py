@@ -1,6 +1,9 @@
+"""Callbacks from widget events."""
+
 import streamlit as st
-from settings import Settings
-from query_params import update_query_params
+
+from demo_streamlit.query_params import update_query_params
+from demo_streamlit.settings import Settings
 
 
 @update_query_params

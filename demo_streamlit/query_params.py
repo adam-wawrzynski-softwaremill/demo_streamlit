@@ -2,26 +2,28 @@
 from functools import wraps
 
 import streamlit as st
-from app_state import get_app_state, save_app_state, AppState
-from settings import Settings
 
+from demo_streamlit.app_state import AppState, get_app_state, save_app_state
+from demo_streamlit.settings import Settings
 
 
 def _update_query_params() -> None:
     """Updates the URL query params."""
     app_state: AppState = get_app_state()
-    query_params: dict[str, list[str]] = dict()
+    query_params: dict[str, list[str]] = {}
     query_params[Settings.message] = [app_state.message]
-    query_params[Settings.selected_sample_index] = [str(app_state.selected_sample_index)]
+    query_params[Settings.selected_sample_index] = [
+        str(app_state.selected_sample_index)
+    ]
     st.experimental_set_query_params(**query_params)
 
 
-def update_query_params(f):
+def update_query_params(function):
     """Updates the URL query params after every app state change."""
 
-    @wraps(f)
+    @wraps(function)
     def wrapper(*args, **kwargs):
-        retval = f(*args, **kwargs)
+        retval = function(*args, **kwargs)
         _update_query_params()
         return retval
 
@@ -37,7 +39,9 @@ def load_query_params() -> None:
         app_state.message = query_params[Settings.message][0]
         force_update = True
     if Settings.selected_sample_index in query_params:
-        app_state.selected_sample_index = int(query_params[Settings.selected_sample_index][0])
+        app_state.selected_sample_index = int(
+            query_params[Settings.selected_sample_index][0]
+        )
         force_update = True
 
     if force_update:
