@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "demo-streamlit"
+version = "0.1.0"
+description = ""
+authors = ["Adam Wawrzyński <adam.wawrzynski@reasonfieldlab.com>"]
+readme = "README.md"
+packages = [{include = "demo_streamlit"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.15.2"
+torchvision = "^0.14.0"
+matplotlib = "^3.6.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
